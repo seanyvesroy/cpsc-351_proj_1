@@ -1,0 +1,31 @@
+CXXFLAGS = -g -std=c++17 -Wall -Wextra -Wpedantic -Werror
+
+all: thrice stderr foreach
+
+.PHONY: all clean test
+
+thrice: thrice.o
+        g++ thrice.o -o thrice
+
+thrice.o:
+        g++ -c thrice.cpp
+        
+stderr: stderr.o
+        g++ stderr.o -o stderr
+
+stderr.o: stderr.cpp
+        g++ -c stderr.cpp
+
+foreach: foreach.o
+        g++ foreach.o -o foreach
+
+foreach.o: foreach.cpp
+        g++ -c foreach.cpp
+
+test: stderr
+        ./stderr && cat stderr_output.txt
+
+clean:
+        rm *.o thrice stderr foreach
+
+
